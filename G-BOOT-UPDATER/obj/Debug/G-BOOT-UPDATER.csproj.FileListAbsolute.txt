@@ -1,0 +1,13 @@
+D:\WinDesktop\G-BOOT-UPDATER\G-BOOT-UPDATER\obj\Debug\G-BOOT-UPDATER.csproj.AssemblyReference.cache
+D:\WinDesktop\G-BOOT-UPDATER\G-BOOT-UPDATER\obj\Debug\G_BOOT_UPDATER.Form1.resources
+D:\WinDesktop\G-BOOT-UPDATER\G-BOOT-UPDATER\obj\Debug\G_BOOT_UPDATER.Properties.Resources.resources
+D:\WinDesktop\G-BOOT-UPDATER\G-BOOT-UPDATER\obj\Debug\G-BOOT-UPDATER.csproj.GenerateResource.cache
+D:\WinDesktop\G-BOOT-UPDATER\G-BOOT-UPDATER\obj\Debug\G-BOOT-UPDATER.csproj.CoreCompileInputs.cache
+D:\WinDesktop\G-BOOT-UPDATER\G-BOOT-UPDATER\bin\Debug\G-BOOT-UPDATER.exe.config
+D:\WinDesktop\G-BOOT-UPDATER\G-BOOT-UPDATER\bin\Debug\G-BOOT-UPDATER.exe
+D:\WinDesktop\G-BOOT-UPDATER\G-BOOT-UPDATER\bin\Debug\G-BOOT-UPDATER.pdb
+D:\WinDesktop\G-BOOT-UPDATER\G-BOOT-UPDATER\obj\Debug\G-BOOT-UPDATER.exe
+D:\WinDesktop\G-BOOT-UPDATER\G-BOOT-UPDATER\obj\Debug\G-BOOT-UPDATER.pdb
+D:\WinDesktop\G-BOOT-UPDATER\G-BOOT-UPDATER\bin\Debug\SunnyUI.Common.dll
+D:\WinDesktop\G-BOOT-UPDATER\G-BOOT-UPDATER\bin\Debug\SunnyUI.dll
+D:\WinDesktop\G-BOOT-UPDATER\G-BOOT-UPDATER\obj\Debug\G-BOOT-U.2C4DA279.Up2Date
