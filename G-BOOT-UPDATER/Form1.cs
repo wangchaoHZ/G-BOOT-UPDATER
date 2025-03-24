@@ -28,7 +28,7 @@ namespace G_BOOT_UPDATER
     {
         private KeyboardHook _keyboardHook;
 
-        private const string SERVER_IP = "127.0.0.1";
+        private const string SERVER_IP = "192.168.1.122";
         private const int SERVER_PORT = 5000;
         private const string ACK_MSG = "ACK";
         private const string CRC_OK_MSG = "CRC_OK";
@@ -66,29 +66,27 @@ namespace G_BOOT_UPDATER
         private void Form1_Load(object sender, EventArgs e)
         {
             //timer1.Enabled = true;
-            if (PingHost("127.0.0.1"))
-            {
-                pictureBox1.Visible = true;
-            }
-            else
-            {
-                pictureBox2.Visible = true;
-            }
         }
 
-        private bool PingHost(string ip)
+        private bool IsPortOpen(string host, int port, int timeout)
         {
             try
             {
-                using (Ping ping = new Ping())
+                using (TcpClient tcpClient = new TcpClient())
                 {
-                    PingReply reply = ping.Send(ip, 1000); // 超时时间 1000ms
-                    return reply.Status == IPStatus.Success;
+                    var result = tcpClient.BeginConnect(host, port, null, null);
+                    bool success = result.AsyncWaitHandle.WaitOne(timeout);
+                    if (!success)
+                    {
+                        return false;
+                    }
+                    tcpClient.EndConnect(result);
+                    return true;
                 }
             }
             catch
             {
-                return false; // 避免异常导致程序崩溃
+                return false;
             }
         }
 
@@ -256,6 +254,32 @@ namespace G_BOOT_UPDATER
 
             Thread flashThread = new Thread(SendFirmware);
             flashThread.Start();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            bool isOpen = IsPortOpen("192.168.1.122", 5000, 1000); // 超时时间 1000ms
+            //Console.WriteLine($"端口 {port} 是否可用: {isOpen}");
+
+            //timer1.Enabled = true;
+            if (isOpen)
+            {
+                pictureBox1.Visible = true;
+            }
+            else
+            {
+                pictureBox2.Visible = true;
+            }
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void uiLabel1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
