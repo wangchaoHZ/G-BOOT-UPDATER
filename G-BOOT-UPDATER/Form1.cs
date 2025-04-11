@@ -21,6 +21,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Net.Sockets;
 using System.Net;
 using Sunny.UI;
+using System.Text.RegularExpressions;
 
 namespace G_BOOT_UPDATER
 {
@@ -28,7 +29,7 @@ namespace G_BOOT_UPDATER
     {
         private KeyboardHook _keyboardHook;
 
-        private const string SERVER_IP = "192.168.1.122";
+        private string SERVER_IP = "192.168.1.122";
         private const int SERVER_PORT = 5000;
         private const string ACK_MSG = "ACK";
         private const string CRC_OK_MSG = "CRC_OK";
@@ -63,6 +64,24 @@ namespace G_BOOT_UPDATER
         {
 
         }
+
+        private string GetValidIPAddress(string input)
+        {
+            // IP 地址的正则表达式
+            string pattern = @"^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$";
+            Regex regex = new Regex(pattern);
+
+            // 检查输入内容是否匹配 IP 格式
+            if (regex.IsMatch(input))
+            {
+                return input; // 返回有效的 IP 地址
+            }
+            else
+            {
+                return null; // 输入内容无效
+            }
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             //timer1.Enabled = true;
@@ -252,24 +271,35 @@ namespace G_BOOT_UPDATER
             uiButton2.Enabled = false;  // 禁用按钮，防止多次点击
             uiProcessBar1.Value = 0;     // 重置进度条
 
-            Thread flashThread = new Thread(SendFirmware);
-            flashThread.Start();
+            //stringIO
+
+            SERVER_IP = GetValidIPAddress(textBox1.Text);
+
+            if (SERVER_IP == null)
+            {
+                MessageBox.Show("输入IP无效，请检查格式和IP");
+            }
+            else
+            { 
+                Thread flashThread = new Thread(SendFirmware);
+                flashThread.Start();
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            bool isOpen = IsPortOpen("192.168.1.122", 5000, 1000); // 超时时间 1000ms
-            //Console.WriteLine($"端口 {port} 是否可用: {isOpen}");
+            //bool isOpen = IsPortOpen("192.168.1.122", 5000, 1000); // 超时时间 1000ms
+            ////Console.WriteLine($"端口 {port} 是否可用: {isOpen}");
 
-            //timer1.Enabled = true;
-            if (isOpen)
-            {
-                pictureBox1.Visible = true;
-            }
-            else
-            {
-                pictureBox2.Visible = true;
-            }
+            ////timer1.Enabled = true;
+            //if (isOpen)
+            //{
+            //    //pictureBox1.Visible = true;
+            //}
+            //else
+            //{
+            //    //pictureBox2.Visible = true;
+            //}
         }
 
         private void timer2_Tick(object sender, EventArgs e)
@@ -278,6 +308,11 @@ namespace G_BOOT_UPDATER
         }
 
         private void uiLabel1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
         }
